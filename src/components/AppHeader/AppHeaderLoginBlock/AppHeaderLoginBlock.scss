@@ -1,0 +1,10 @@
+@import "../../../assets/mixins";
+
+.block {
+  &__username {
+    display: none;
+    @media #{$min768} {
+      display: block;
+    }
+  }
+}

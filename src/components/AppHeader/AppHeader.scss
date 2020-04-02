@@ -1,0 +1,22 @@
+@import "../../assets/mixins";
+
+.header {
+  display: flex;
+  justify-content: center;
+
+  &__inner_block {
+    width: var(--app-content-width-desktop);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .item {
+    &__title {
+      font-size: var(--font-title);
+      font-weight: bold;
+      color: var(--base-font-color);
+      text-decoration: none;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+.form {
+  .input {
+    &__title, &__text {
+      width: 100%;
+      padding: .2rem .5rem;
+      border: .05rem solid var(--color-grey);
+      border-radius: .2rem;
+    }
+    &__title {
+      font-size: var(--font-title);
+    }
+    &__text {
+      font-size: var(--font-size-base);
+      width: 100%;
+      resize: none;
+    }
+  }
+  &__group {
+    &:not(:first-child) {
+      margin: 1rem 0;
+    }
+  }
+}

@@ -1,0 +1,7 @@
+@import '../../mixins';
+
+.container {
+  &__app-container {
+    width: 100%;
+  }
+}

@@ -1,0 +1,25 @@
+.button {
+  cursor: pointer;
+  &__action {
+    &--prev {
+      width: 2rem;
+      height: 2rem;
+      border: .06rem solid var(--color-grey);
+      border-radius: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover {
+        background: var(--color-grey);
+      }
+      &:before {
+        content: '';
+        display: flex;
+        background: url("../../assets/images/svg/back.svg");
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+  }
+}

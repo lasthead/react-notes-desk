@@ -1,0 +1,41 @@
+@import "./assets/fonts/style";
+@import "./assets/mixins";
+@import "assets/blocks/container/style";
+
+:root {
+  --font-helvetica: "Helvetica Neue";
+  --app-content-width-desktop: 40rem;
+  --color-grey: #DAD0DADA;
+  --font-title: 1.7rem;
+  --font-size-base: 1rem;
+  --base-font-color: #0f0522de;
+}
+
+html {
+  font-size: 12px;
+  font-family: var(--font-helvetica);
+  position: relative;
+  color: var(--base-font-color);
+  @media #{$min768} {
+    font-size: 16px;
+  }
+}
+
+body {
+  margin: 0;
+}
+
+.app__wrapper {
+  padding: 4rem 2rem;
+}
+
+.content {
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+  }
+  &__block {
+    width: var(--app-content-width-desktop);
+    padding: 0 2rem;
+  }
+}
