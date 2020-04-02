@@ -14,7 +14,7 @@ export default class AppHeader extends Component {
       <div className="header">
         <div className="header__inner_block">
           <Link to={'/'} className="header__item item__title">My notes</Link>
-          <AppNavButton action={handleClick} className={"button header__item item__button--add"} title="+ Add new"/>
+          <AppNavButton action={handleClick} className={"button button__primary"} title="+ Add new"/>
           <AppHeaderLoginBlock className="header__item item__login" />
         </div>
       </div>

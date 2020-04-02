@@ -8,12 +8,14 @@ import Home from './pages/notes'
 import Login from './pages/login'
 import './App.scss';
 import Edit from "./pages/edit/edit";
+import { browserHistory } from 'react-router';
 
 class App extends Component {
   render() {
     const { history } = this.props;
     return (
       <div className="App app__wrapper">
+        <div className="progress-bar" />
         <Switch>
           <Route exact history={history} path='/' component={Home}/>
           <Route exact history={history} path='/edit/:id' component={Edit}/>

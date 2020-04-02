@@ -5,9 +5,11 @@ import AppNavButton from "../AppNavButton/AppNavButton";
 export default class AppFormEditItem extends Component {
   render() {
     const handleSubmit = (event) => {
-      // this.props.onSubmit;
       event.preventDefault();
-    }
+      const action = this.props.onSubmit;
+      console.log(action);
+      //action();
+    };
     return(
       <div className="form form__wrapper">
         <form onSubmit={handleSubmit}>
@@ -17,9 +19,9 @@ export default class AppFormEditItem extends Component {
           <div className="form__group">
             <textarea rows="12" placeholder={"Write note text"} className="input input__text"/>
           </div>
-          <div className="form__group">
-            <AppNavButton type="submit" className={'button__action--save'} title="Save" />
-            <button className="button button__action--remove" />
+          <div className="form__group group__buttons">
+            <AppNavButton type="submit" className={'button button__primary'} title="Save" />
+            <AppNavButton type="button" className={'button button__action--remove'} />
           </div>
         </form>
       </div>

@@ -1,7 +1,9 @@
 @import "../../../assets/mixins";
 
-.block {
-  &__username {
+.user-info {
+  text-align: right;
+  
+  &__name {
     display: none;
     @media #{$min768} {
       display: block;

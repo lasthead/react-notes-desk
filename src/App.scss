@@ -5,7 +5,7 @@
 :root {
   --font-helvetica: "Helvetica Neue";
   --app-content-width-desktop: 40rem;
-  --color-grey: #DAD0DADA;
+  --color-grey: #C0C0C0;
   --font-title: 1.7rem;
   --font-size-base: 1rem;
   --base-font-color: #0f0522de;
@@ -25,6 +25,10 @@ body {
   margin: 0;
 }
 
+a {
+  color: var(--base-font-color);
+}
+
 .app__wrapper {
   padding: 4rem 2rem;
 }
@@ -37,5 +41,15 @@ body {
   &__block {
     width: var(--app-content-width-desktop);
     padding: 0 2rem;
+    position: relative;
   }
+}
+
+.progress-bar {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: green;
+  height: .1rem;
 }

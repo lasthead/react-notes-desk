@@ -6,11 +6,14 @@ import PropTypes from 'prop-types';
 
 function NotesList(state) {
   return (
-    state.notes.map((note, index) => {
-        console.log(note.id && index);
-        return (<AppListItem key={note.id ? note.id : index} {...note} onClick={() => toggleNote(note.id)}/>)
+    <div className="items__list">
+      {
+        state.notes.map((note, index) => {
+            return (<AppListItem key={note.id ? note.id : index} {...note} onClick={() => toggleNote(note.id)}/>)
+          }
+        )
       }
-    )
+    </div>
   )
 }
 

@@ -15,8 +15,8 @@ export default class Edit extends Component {
     return(
       <div>
         <div className="content__wrapper container__edit">
-          <AppNavButton action={handleClick} className={'button button__nav button__action--prev'} />
           <div className="block content__block">
+            <AppNavButton action={handleClick} className={'button button__nav button__action--prev'} />
             <AppFormEditItem goBack={handleClick} onSubmit={actions}/>
           </div>
         </div>

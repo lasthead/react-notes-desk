@@ -1,4 +1,5 @@
 .button {
+  font-size: var(--font-size-base);
   cursor: pointer;
   &__action {
     &--prev {
@@ -16,10 +17,31 @@
       &:before {
         content: '';
         display: flex;
-        background: url("../../assets/images/svg/back.svg");
+        background: url("../../assets/images/svg/back.svg") no-repeat;
         width: 1rem;
         height: 1rem;
       }
     }
+    &--remove {
+      background: url("../../assets/images/svg/trash.svg") no-repeat;
+      border: none;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+  &__primary {
+    height: 2.5rem;
+    min-width: 5rem;
+    border: .05rem solid var(--base-font-color);
+    border-radius: .4rem;
+  }
+}
+
+.group {
+  &__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 8rem;
   }
 }
