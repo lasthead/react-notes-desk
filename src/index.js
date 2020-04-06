@@ -6,13 +6,15 @@ import rootReducer from './store/reducers'
 import { Router } from "react-router-dom";
 import * as serviceWorker from './serviceWorker';
 import {createStore} from "redux";
-import { addNote } from "./store/actions/notes.actions.js";
-import {removeNote} from "./store/actions/notes.actions";
+import axios from "axios";
 import { createBrowserHistory } from "history";
+
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+axios.defaults.headers.common['Authorization'] = 'TOKEN_HERE';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 const store = createStore(rootReducer);
 const customHistory = createBrowserHistory();
-
 const app = (
   <Provider store={store}>
     <Router history={customHistory}>
