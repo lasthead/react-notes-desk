@@ -1,26 +1,38 @@
-import React, {Component} from "react";
+import React from "react";
 import AppFormEditItem from "../../components/AppFormEditItem/AppFormEditItem";
 import "./edit.scss";
 import AppNavButton from "../../components/AppNavButton/AppNavButton";
-import { addNote } from "../../store/actions/notes.actions.js";
-import { bindActionCreators } from "redux";
+import { addNote, updateNote } from "../../store/actions/notes.actions.js";
+import { useHistory, useParams } from "react-router-dom";
+import {useSelector, useStore} from "react-redux";
 
-export default class Edit extends Component {
-  render() {
-    const { dispatch } = this.props;
-    const actions = bindActionCreators(addNote, dispatch);
-    const handleClick = () => {
-      this.props.history.push("/");
-    };
-    return(
-      <div>
-        <div className="content__wrapper container__edit">
-          <div className="block content__block">
-            <AppNavButton action={handleClick} className={'button button__nav button__action--prev'} />
-            <AppFormEditItem goBack={handleClick} onSubmit={actions}/>
-          </div>
+function Edit(props) {
+  const store = useStore();
+  const params = useParams();
+  const object = useSelector(state => state.notes[params.id]);
+  const history = useHistory();
+  const actions = (formData) => {
+    if(params.mode === 'edit'){
+      store.dispatch(updateNote(formData));
+    }
+    else {
+      store.dispatch(addNote(formData));
+    }
+    history.push('/');
+  };
+  const handleClick = () => {
+    history.push("/");
+  };
+  return(
+    <div>
+      <div className="content__wrapper container__edit">
+        <div className="block content__block">
+          <AppNavButton action={handleClick} className={'button button__nav button__action--prev'} />
+          <AppFormEditItem {...object} goBack={handleClick} onSubmit={actions}/>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
+
+export default Edit;

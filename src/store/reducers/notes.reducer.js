@@ -20,17 +20,16 @@ const notesReducer = (state = defaultState, action) => {
       return [
         ...state,
         {
-          id: action.object.id,
+          id: action.object.id ? action.object.id : state.length,
           name: action.object.name,
           text: action.object.text,
           completed: action.object.completed
         }
       ];
-    case NOTES_CONSTANTS.TOGGLE_NOTE:
-      return state.map(note =>
-        (note.id === action.id)
-          ? {...note, completed: !note.completed}
-          : note
+    case NOTES_CONSTANTS.UPDATE_NOTE:
+      return state.map(note => note.id === action.object.id ?
+        { ...note,  name: action.object.name, text: action.object.text } :
+        note
       );
     case NOTES_CONSTANTS.REMOVE_NOTE:
       return state.filter((note) => note.id !== action.id);

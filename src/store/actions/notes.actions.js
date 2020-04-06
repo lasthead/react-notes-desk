@@ -1,4 +1,5 @@
 import { NOTES_CONSTANTS } from '../constants/';
+import axios from "axios";
 
 export function addNote(object) {
   return {
@@ -7,10 +8,10 @@ export function addNote(object) {
   };
 }
 
-export function toggleNote(id) {
+export function updateNote(object) {
   return {
-    type: NOTES_CONSTANTS.TOGGLE_NOTE,
-    id
+    type: NOTES_CONSTANTS.UPDATE_NOTE,
+    object
   };
 }
 

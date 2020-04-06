@@ -1,15 +1,21 @@
-import React, {Component} from "react";
+import React from "react";
 import { connect } from 'react-redux';
 import "./AppNotesList.scss";
 import AppListItem from "../AppListItem/AppListItem";
-import PropTypes from 'prop-types';
+import { useHistory } from "react-router-dom";
 
-function NotesList(state) {
+
+function NotesList(props) {
+  const history = useHistory();
+  function toggleNote(id) {
+    history.push("/edit/" + id );
+  }
+
   return (
     <div className="items__list">
       {
-        state.notes.map((note, index) => {
-            return (<AppListItem key={note.id ? note.id : index} {...note} onClick={() => toggleNote(note.id)}/>)
+        props.items.map((note, index) => {
+            return (<AppListItem key={note.id ? note.id : index} {...note} onClick={toggleNote}/>)
           }
         )
       }
@@ -17,9 +23,6 @@ function NotesList(state) {
   )
 }
 
-function toggleNote(id) {
-  return false;
-}
 // NotesList.propTypes = {
 //   notes: PropTypes.arrayOf(
 //     PropTypes.shape({
@@ -31,7 +34,5 @@ function toggleNote(id) {
 //   ).isRequired,
 //   toggleNote: PropTypes.func.isRequired
 // }
-const mapStateToProps = function(state) {
-  return state;
-}
-export default connect(mapStateToProps)(NotesList)
+
+export default NotesList
