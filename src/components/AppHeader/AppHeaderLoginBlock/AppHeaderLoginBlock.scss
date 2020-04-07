@@ -2,11 +2,18 @@
 
 .user-info {
   text-align: right;
-  
+
   &__name {
     display: none;
     @media #{$min768} {
       display: block;
     }
+  }
+}
+
+.link {
+  &__logout {
+    cursor: pointer;
+    text-decoration: underline;
   }
 }

@@ -1,17 +1,18 @@
 import React, {useCallback, useState} from "react";
-import "./AppFormEditItem.scss";
 import AppNavButton from "../AppNavButton/AppNavButton";
+import "./AppFormEditItem.scss";
 
 export default function AppFormEditItem(props) {
   const [formData, setFormData] = useState(props);
+
   const updateField = useCallback((event) => {
     const { name, value } = event.target;
     setFormData({
       ...formData,
       [name]: value
     });
-    //action();
   }, [formData]);
+
   const handleSubmit = (e) => {
     props.onSubmit(formData);
     e.preventDefault();

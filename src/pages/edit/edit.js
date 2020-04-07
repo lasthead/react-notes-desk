@@ -10,6 +10,7 @@ function Edit(props) {
   const store = useStore();
   const params = useParams();
   const object = useSelector(state => state.notes[params.id]);
+  console.log(params);
   const history = useHistory();
   const actions = (formData) => {
     if(params.mode === 'edit'){

@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React, {useEffect} from 'react';
 import {
-  Route,
   Switch,
   withRouter
 } from "react-router-dom";
