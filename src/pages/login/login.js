@@ -5,7 +5,7 @@ import AppNavButton from "../../components/AppNavButton/AppNavButton";
 import BaseInput from "../../components/BaseUI/BaseInput";
 import BaseTitle from "../../components/BaseUI/BaseTitle";
 import { logIn, userCreate } from "../../store/actions"
-import {useDispatch, connect} from "react-redux";
+import {useDispatch} from "react-redux";
 
 function Login(props) {
   const [formData, setFormData] = useState({});
@@ -13,7 +13,7 @@ function Login(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if(props.authCreate){
+      if(props.mode === "create"){
         dispatch(await userCreate(formData));
       }
       else{
@@ -60,9 +60,9 @@ function Login(props) {
               type={'password'}
             />
             <div className="form__group login__buttons">
-              {props.authLogin &&  <a onClick={handleToCreate} href="#" className="link__action">I dont have already account</a>}
-              {props.authCreate &&  <a onClick={handleToLogin} href="#" className="link__action">I have already account</a>}
-              <AppNavButton type="submit" className={'button button__primary'} title={props.authLogin ? "Sign in" : "Sign up"}/>
+              {props.mode === "login" &&  <a onClick={handleToCreate} href="#" className="link__action">I dont have already account</a>}
+              {props.mode === "create" &&  <a onClick={handleToLogin} href="#" className="link__action">I have already account</a>}
+              <AppNavButton type="submit" className={'button button__primary'} title={props.mode === "login" ? "Sign in" : "Sign up"}/>
             </div>
           </form>
         </div>

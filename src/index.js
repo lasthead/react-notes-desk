@@ -10,9 +10,9 @@ import axios from "axios";
 import { createBrowserHistory } from "history";
 import thunk from "redux-thunk";
 import {setUserData} from "./store/actions";
-import {useDispatch, useSelector} from "react-redux";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+
 const store = createStore(rootReducer, applyMiddleware(thunk));
 const customHistory = createBrowserHistory();
 const asyncGetUserData = async () => {

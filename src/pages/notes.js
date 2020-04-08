@@ -1,10 +1,17 @@
-import React, { useCallback, useState } from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import "./notes.scss";
 import AppNotesList from "../components/AppNotesList/AppNotesList";
 import AppHeader from "../components/AppHeader/AppHeader";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {getNotesList} from "../store/actions";
 
 export default function Notes(props) {
+  const dispatch = useDispatch();
+  const asyncGetItemsList = async () => {
+    dispatch(await getNotesList());
+  };
+  useEffect( () => { asyncGetItemsList() }, []);
+
   const notes = useSelector(state => state.notes);
   // console.log(notes);
   // let items = notes;

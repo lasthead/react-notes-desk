@@ -31,7 +31,6 @@ export default (state = initialState, action) => {
         isLoading: false
       };
     case SESSION_CONSTANTS.USER_SET_DATA:
-      console.log(action.payload.name);
       return {
         ...state,
         user: {

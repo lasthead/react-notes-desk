@@ -63,8 +63,8 @@ export default function App() {
       { (appData.hasAuthStateChanged && !store.getState().session.isLoading) &&
         <Switch>
           <AuthRoute authUser={appData.authUser} authOnly exact history={history} path='/' component={Home}/>
-          <AuthRoute authUser={appData.authUser} noAuthOnly path='/auth/login' history={history} component={Login}/>
-          <AuthRoute authUser={appData.authUser} noAuthOnly path='/auth/create' history={history} component={Login}/>
+          <AuthRoute authUser={appData.authUser} noAuthOnly path='/auth/login' mode="login" history={history} component={Login}/>
+          <AuthRoute authUser={appData.authUser} noAuthOnly path='/auth/create' mode="create" history={history} component={Login}/>
           <AuthRoute authUser={appData.authUser} authOnly exact history={history} mode="add" path='/add' component={Edit}/>
           <AuthRoute authUser={appData.authUser} authOnly exact history={history} path='/edit/:id' component={Edit}/>
         </Switch>

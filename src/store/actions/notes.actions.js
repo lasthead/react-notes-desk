@@ -1,22 +1,52 @@
 import { NOTES_CONSTANTS } from '../constants/';
+import { SESSION_CONSTANTS } from '../constants'
 
-export const addNote = (object) => {
-  return {
+import {createNoteApi, getItemsListApi, updateNoteApi, removeNoteApi} from "../../services/API";
+
+export const addNote = (object) => async dispatch  => {
+  try {
+    dispatch({ type: SESSION_CONSTANTS.LOADING });
+    await createNoteApi(object);
+  } catch (e) {
+    console.log('error');
+  }
+  dispatch({ type: SESSION_CONSTANTS.STOP_LOADING });
+  dispatch({
     type: NOTES_CONSTANTS.ADD_NOTE,
     object
-  };
+  });
 };
 
-export const updateNote = (object) => {
-  return {
-    type: NOTES_CONSTANTS.UPDATE_NOTE,
-    object
-  };
+
+export const getNotesList = () => async dispatch => {
+  try {
+    const response = await getItemsListApi();
+    dispatch({
+      type: NOTES_CONSTANTS.SET_NOTES_LIST,
+      payload: response.data
+    });
+  }
+  catch (e) {
+    console.log('error');
+  }
 };
 
-export const removeNote = (id) => {
-  return {
-    type: NOTES_CONSTANTS.REMOVE_NOTE,
-    id
-  };
+export const updateNote = (object) => async dispatch => {
+  try {
+    await updateNoteApi(object);
+    dispatch({
+      type: NOTES_CONSTANTS.UPDATE_NOTE,
+      payload: object
+    });
+  } catch (e) {}
+};
+
+export const removeNote = (id) => async dispatch => {
+  try {
+    await removeNoteApi(id);
+    dispatch({
+      type: NOTES_CONSTANTS.REMOVE_NOTE,
+      id
+    });
+  } catch (e) {}
 };

@@ -1,10 +1,10 @@
 import { SESSION_CONSTANTS } from '../constants'
-import { getUserData, authorizationUser, createUser } from "../../services/API";
+import { getUserData, authorizationUserApi, createUserApi } from "../../services/API";
 
 export const logIn = ({ email, password }) => async dispatch => {
   try {
     dispatch({ type: SESSION_CONSTANTS.LOG_IN_START });
-    const response = await authorizationUser({ email, password });
+    const response = await authorizationUserApi({ email, password });
     if (response.data.access_token) {
       localStorage.setItem('refreshToken', "Bearer " + response.data.access_token)
     }
@@ -21,8 +21,7 @@ export const logIn = ({ email, password }) => async dispatch => {
 export const userCreate = ({ email, password }) => async dispatch => {
   try {
     dispatch({ type: SESSION_CONSTANTS.LOG_IN_START });
-    const response = await createUser({ email, password });
-    console.log(response);
+    const response = await createUserApi({ email, password });
     if (response.data.access_token) {
       localStorage.setItem('refreshToken', "Bearer " + response.data.access_token)
     }
@@ -40,7 +39,6 @@ export const setUserData = () => async dispatch => {
   try {
   dispatch({ type: SESSION_CONSTANTS.LOADING });
   const payload = await getUserData();
-  console.log(payload);
   dispatch({
     type: SESSION_CONSTANTS.USER_SET_DATA,
     payload: payload.data

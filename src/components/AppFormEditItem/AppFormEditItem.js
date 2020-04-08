@@ -1,9 +1,10 @@
-import React, {useCallback, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import AppNavButton from "../AppNavButton/AppNavButton";
 import "./AppFormEditItem.scss";
 
 export default function AppFormEditItem(props) {
-  const [formData, setFormData] = useState(props);
+  const [formData, setFormData] = useState({});
+  useEffect( () => { setFormData(props) }, [props]);
 
   const updateField = useCallback((event) => {
     const { name, value } = event.target;
@@ -15,6 +16,10 @@ export default function AppFormEditItem(props) {
 
   const handleSubmit = (e) => {
     props.onSubmit(formData);
+    e.preventDefault();
+  };
+  const handleRemove = (e) => {
+    props.handleRemoveItem(formData.id);
     e.preventDefault();
   };
 
@@ -29,7 +34,7 @@ export default function AppFormEditItem(props) {
         </div>
         <div className="form__group group__buttons">
           <AppNavButton type="submit" className={'button button__primary'} title="Save" />
-          <AppNavButton type="button" className={'button button__action--remove'} />
+          <AppNavButton action={handleRemove} type="button" className={'button button__action--remove'} />
         </div>
       </form>
     </div>
