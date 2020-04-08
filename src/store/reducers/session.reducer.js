@@ -49,6 +49,11 @@ export default (state = initialState, action) => {
         ...state,
         isLoading: true
       };
+    case SESSION_CONSTANTS.STOP_LOADING:
+      return {
+        ...state,
+        isLoading: false
+      };
     default:
       return state
   }

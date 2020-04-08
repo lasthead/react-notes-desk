@@ -37,12 +37,16 @@ export const userCreate = ({ email, password }) => async dispatch => {
 };
 
 export const setUserData = () => async dispatch => {
+  try {
   dispatch({ type: SESSION_CONSTANTS.LOADING });
   const payload = await getUserData();
   dispatch({
     type: SESSION_CONSTANTS.USER_SET_DATA,
     payload: payload.data
   })
+  } catch (e) {
+    dispatch({ type: SESSION_CONSTANTS.STOP_LOADING });
+  }
 };
 
 
