@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Switch,
   useHistory
@@ -8,32 +8,65 @@ import Login from './pages/login/login'
 import './App.scss';
 import Edit from "./pages/edit/edit";
 import { setUserData } from './store/actions';
-import {useDispatch, useSelector} from "react-redux";
-import PrivateRoute from "./components/PrivateRoute";
-import LoginRoute from "./components/LoginRoute";
+import {useDispatch, useSelector, useStore} from "react-redux";
+import AuthRoute from "./components/AuthRoute";
 
 export default function App() {
   const dispatch = useDispatch();
-  const session = useSelector( state => state.session);
+  const store = useStore();
+  const [appData, setAppData] = useState({
+    hasAuthStateChanged: false,
+    authUser: null
+  });
   const asyncGetUserData = async () => {
     if (localStorage.getItem('refreshToken')) {
       try {
         dispatch(await setUserData());
-      } catch(error) {}
+        setAppData({
+          hasAuthStateChanged: true,
+          authUser: true
+        });
+      } catch(error) {
+        localStorage.removeItem('refreshToken');
+        setAppData({
+          hasAuthStateChanged: true,
+          authUser: null
+        });
+      }
+    }
+    else {
+      setAppData({
+        hasAuthStateChanged: true,
+        authUser: null
+      });
     }
   };
   useEffect( () => { asyncGetUserData(); }, []);
   const history = useHistory();
+  store.subscribe(() => {
+    if(!store.getState().session.user) {
+      setAppData({
+        hasAuthStateChanged: true,
+        authUser: null
+      })
+    }
+    else {
+      setAppData({
+        hasAuthStateChanged: true,
+        authUser: store.getState().session.user
+      });
+    }
+  });
   return (
     <div className="App app__wrapper">
-      { session.isLoading &&  <div className="progress-bar hidden" /> }
-      { !session.isLoading &&
+      { !appData.hasAuthStateChanged &&  <div className="progress-bar hidden" /> }
+      { appData.hasAuthStateChanged &&
         <Switch>
-          <PrivateRoute isAuth={!!session.user} exact history={history} path='/' component={Home}/>
-          <LoginRoute isAuth={!!session.user} authLogin path='/auth/login' history={history} component={Login}/>
-          <LoginRoute isAuth={!!session.user} authCreate path='/auth/create' history={history} component={Login}/>
-          <PrivateRoute isAuth={!!session.user} exact history={history} path='/edit/:id' component={Edit}/>
-          <PrivateRoute isAuth={!!session.user} exact history={history} path='/add' component={Edit}/>
+          <AuthRoute authUser={appData.authUser} authOnly exact history={history} path='/' component={Home}/>
+          <AuthRoute authUser={appData.authUser} noAuthOnly path='/auth/login' history={history} component={Login}/>
+          <AuthRoute authUser={appData.authUser} noAuthOnly path='/auth/create' history={history} component={Login}/>
+          <AuthRoute authUser={appData.authUser} authOnly exact history={history} mode="add" path='/add' component={Edit}/>
+          <AuthRoute authUser={appData.authUser} authOnly exact history={history} path='/edit/:id' component={Edit}/>
         </Switch>
       }
     </div>

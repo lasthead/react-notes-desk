@@ -1,19 +1,6 @@
 import { NOTES_CONSTANTS } from "../constants/"
 
-const defaultState = [
-  {
-    id: 0,
-    name: 'test',
-    text: 'lorem ipsum',
-    completed: false
-  },
-  {
-    id: 1,
-    name: 'test 1',
-    text: '123 lorem ipsum sit',
-    completed: false
-  }
-];
+const defaultState = [];
 const notesReducer = (state = defaultState, action) => {
   switch (action.type) {
     case NOTES_CONSTANTS.ADD_NOTE:

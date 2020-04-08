@@ -10,14 +10,13 @@ function Edit(props) {
   const store = useStore();
   const params = useParams();
   const object = useSelector(state => state.notes[params.id]);
-  console.log(params);
   const history = useHistory();
   const actions = (formData) => {
-    if(params.mode === 'edit'){
-      store.dispatch(updateNote(formData));
+    if(props.mode === 'add'){
+      store.dispatch(addNote(formData));
     }
     else {
-      store.dispatch(addNote(formData));
+      store.dispatch(updateNote(formData));
     }
     history.push('/');
   };

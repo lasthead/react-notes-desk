@@ -40,6 +40,7 @@ export const setUserData = () => async dispatch => {
   try {
   dispatch({ type: SESSION_CONSTANTS.LOADING });
   const payload = await getUserData();
+  console.log(payload);
   dispatch({
     type: SESSION_CONSTANTS.USER_SET_DATA,
     payload: payload.data
