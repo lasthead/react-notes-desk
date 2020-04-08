@@ -11,7 +11,6 @@ import { createBrowserHistory } from "history";
 import thunk from "redux-thunk";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
-axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 const customHistory = createBrowserHistory();
