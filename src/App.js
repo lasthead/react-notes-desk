@@ -59,8 +59,8 @@ export default function App() {
   });
   return (
     <div className="App app__wrapper">
-      { !appData.hasAuthStateChanged &&  <div className="progress-bar hidden" /> }
-      { appData.hasAuthStateChanged &&
+      { (!appData.hasAuthStateChanged || store.getState().session.isLoading) &&  <div className="progress-bar hidden" /> }
+      { (appData.hasAuthStateChanged && !store.getState().session.isLoading) &&
         <Switch>
           <AuthRoute authUser={appData.authUser} authOnly exact history={history} path='/' component={Home}/>
           <AuthRoute authUser={appData.authUser} noAuthOnly path='/auth/login' history={history} component={Login}/>
