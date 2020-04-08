@@ -4,8 +4,12 @@ import dayjs from 'dayjs';
 import {timeSince} from "../../utils/baseHelper";
 
 export default function AppListItem(props) {
-  const minutes = 60*60*100;
-  const formatedDate = timeSince(new Date(dayjs(props.updated_at).valueOf() - minutes));
+  let timeRate = 1000;
+  if (Date.now() > dayjs(props.updated_at).valueOf() + 3600 * timeRate) {
+    timeRate = timeRate * 60 * 60;
+  };
+
+  const formatedDate = timeSince(new Date(dayjs(props.updated_at).valueOf() - timeRate));
 
   return (
     <div onClick={ () => props.onClick(props.id) } className="item item__container">

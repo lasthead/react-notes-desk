@@ -33,7 +33,7 @@ export const getItemByIdApi = async (id) => {
   return await axios.get('/get_item', {
     params,
     headers: {
-      Authorization: localStorage.getItem('refreshToken')
+      Authorization: localStorage.getItem('refreshToken'),
     }
   });
 };
@@ -47,7 +47,7 @@ export const createNoteApi = async (dataForm) => {
 };
 
 export const updateNoteApi = async (dataForm) => {
-  return await axios.post('/update_item', dataForm, {
+  return await axios.put('/update_item', dataForm, {
     headers: {
       Authorization: localStorage.getItem('refreshToken')
     }
@@ -58,7 +58,7 @@ export const removeNoteApi = async (id) => {
   const params = {
     id
   };
-  return await axios.post('/remove_item', {
+  return await axios.delete('/remove_item', {
     params,
     headers: {
       Authorization: localStorage.getItem('refreshToken')
