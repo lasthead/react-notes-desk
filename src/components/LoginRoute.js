@@ -1,14 +1,15 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 
-const LoginRoute = ({ component: Component, isAuth }) => {
+const LoginRoute = ({ component: Component, isAuth, ...rest }) => {
   return (
     <Route
-      render={props =>
+      render={(props) =>
         !isAuth ? (
-          <Component {...props} />
+          <Component {...rest} {...props} />
         ) : (
           <Redirect
+            {...props}
             to={{
               pathname: '/',
               state: { from: props.location }

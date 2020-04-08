@@ -1,7 +1,7 @@
 .form {
   .input {
     &__title, &__text {
-      width: 100%;
+      width: calc(100% - 1.1rem);
       padding: .2rem .5rem;
       border: .05rem solid var(--color-grey);
       border-radius: .2rem;

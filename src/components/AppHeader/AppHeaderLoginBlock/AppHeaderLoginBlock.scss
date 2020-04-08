@@ -12,8 +12,9 @@
 }
 
 .link {
-  &__logout {
-    cursor: pointer;
-    text-decoration: underline;
+  &__action {
+    &:hover{
+      text-decoration: none;
+    }
   }
 }

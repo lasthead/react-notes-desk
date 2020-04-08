@@ -13,3 +13,7 @@ export const getUserData = async () => {
 export const authorizationUser = async (dataForm) => {
   return await axios.post('/auth/login', dataForm);
 };
+
+export const createUser = async (dataForm) => {
+  return await axios.post('/auth/create', dataForm);
+};

@@ -4,7 +4,7 @@ import {
   useHistory
 } from "react-router-dom";
 import Home from './pages/notes'
-import Login from './pages/login'
+import Login from './pages/login/login'
 import './App.scss';
 import Edit from "./pages/edit/edit";
 import { setUserData } from './store/actions';
@@ -30,9 +30,10 @@ export default function App() {
       { !session.isLoading &&
         <Switch>
           <PrivateRoute isAuth={!!session.user} exact history={history} path='/' component={Home}/>
-          <LoginRoute isAuth={!!session.user} path='/login' history={history} component={Login}/>
-          <PrivateRoute isAuth={!!session.user} exact history={history} path='/:mode/:id' component={Edit}/>
-          <PrivateRoute isAuth={!!session.user} exact history={history} path='/:mode' component={Edit}/>
+          <LoginRoute isAuth={!!session.user} authLogin path='/auth/login' history={history} component={Login}/>
+          <LoginRoute isAuth={!!session.user} authCreate path='/auth/create' history={history} component={Login}/>
+          <PrivateRoute isAuth={!!session.user} exact history={history} path='/edit/:id' component={Edit}/>
+          <PrivateRoute isAuth={!!session.user} exact history={history} path='/add' component={Edit}/>
         </Switch>
       }
     </div>

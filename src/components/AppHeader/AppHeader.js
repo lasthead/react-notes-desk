@@ -13,7 +13,8 @@ export default function AppHeader() {
   const handleClick = () => {
     history.push("/add");
   };
-  const handleLogOut = () => {
+  const handleLogOut = (event) => {
+    event.preventDefault();
     dispatch(logOut());
   };
   return (

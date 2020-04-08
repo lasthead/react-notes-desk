@@ -1,10 +1,27 @@
 import { SESSION_CONSTANTS } from '../constants'
-import { getUserData, authorizationUser } from "../../utils/API";
+import { getUserData, authorizationUser, createUser } from "../../services/API";
 
 export const logIn = ({ email, password }) => async dispatch => {
   try {
     dispatch({ type: SESSION_CONSTANTS.LOG_IN_START });
     const response = await authorizationUser({ email, password });
+    if (response.data.access_token) {
+      localStorage.setItem('refreshToken', "Bearer " + response.data.access_token)
+    }
+    dispatch({
+      type: SESSION_CONSTANTS.LOG_IN_SUCCESS,
+      payload: response.data
+    });
+  } catch (error) {
+    dispatch({ type: SESSION_CONSTANTS.LOG_IN_FAIL, message: error });
+    console.log(error);
+  }
+};
+
+export const userCreate = ({ email, password }) => async dispatch => {
+  try {
+    const response = await createUser({ email, password });
+    console.log(response);
     if (response.data.access_token) {
       localStorage.setItem('refreshToken', "Bearer " + response.data.access_token)
     }
@@ -29,10 +46,7 @@ export const setUserData = () => async dispatch => {
 
 
 export const logOut = () => {
-  console.log(localStorage.getItem('refreshToken'));
   localStorage.removeItem('refreshToken');
-  console.log(localStorage.getItem('refreshToken'));
-
   return {
     type: SESSION_CONSTANTS.LOG_OUT,
     payload: null
