@@ -20,6 +20,7 @@ export const logIn = ({ email, password }) => async dispatch => {
 
 export const userCreate = ({ email, password }) => async dispatch => {
   try {
+    dispatch({ type: SESSION_CONSTANTS.LOG_IN_START });
     const response = await createUser({ email, password });
     console.log(response);
     if (response.data.access_token) {
