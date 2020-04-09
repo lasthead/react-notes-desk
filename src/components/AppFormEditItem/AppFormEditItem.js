@@ -1,6 +1,8 @@
 import React, {useCallback, useEffect, useState} from "react";
-import AppNavButton from "../AppNavButton/AppNavButton";
+import cls from "classnames";
+
 import "./AppFormEditItem.scss";
+import buttonStyles from "../AppNavButton/AppNavButton.module.scss";
 
 export default function AppFormEditItem(props) {
   const [formData, setFormData] = useState({});
@@ -32,9 +34,17 @@ export default function AppFormEditItem(props) {
         <div className="form__group">
           <textarea onChange={updateField} name={'text'} rows="12" defaultValue={formData.text} placeholder={"Write note text"} className="input input__text"/>
         </div>
-        <div className="form__group group__buttons">
-          <AppNavButton type="submit" className={'button button__primary'} title="Save" />
-          <AppNavButton action={handleRemove} type="button" className={'button button__action--remove'} />
+        <div className={cls("form__group", buttonStyles.group__buttons)}>
+          <button
+            type="submit"
+            className={cls(buttonStyles.button, buttonStyles.button__primary)}>
+            Save
+          </button>
+          { props.removeButton && <button
+            type="button"
+            onClick={handleRemove}
+            className={cls(buttonStyles.button, buttonStyles.button__action_remove)}
+          />}
         </div>
       </form>
     </div>

@@ -1,8 +1,8 @@
 import React from "react";
-import "./baseTitile.scss";
+import styles from "./baseTitile.module.scss";
 
 export default function BaseTitle(props) {
   return(
-    <h1>{props.text}</h1>
+    <h1 className={styles.title}>{props.text}</h1>
   )
 }

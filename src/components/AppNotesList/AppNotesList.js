@@ -23,16 +23,4 @@ function NotesList(props) {
   )
 }
 
-// NotesList.propTypes = {
-//   notes: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.number.isRequired,
-//       name: PropTypes.string.isRequired,
-//       completed: PropTypes.bool.isRequired,
-//       text: PropTypes.string.isRequired
-//     }).isRequired
-//   ).isRequired,
-//   toggleNote: PropTypes.func.isRequired
-// }
-
 export default NotesList

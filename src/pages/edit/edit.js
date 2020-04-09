@@ -1,26 +1,37 @@
 import React, {useEffect, useState} from "react";
 import AppFormEditItem from "../../components/AppFormEditItem/AppFormEditItem";
-import "./edit.scss";
-import AppNavButton from "../../components/AppNavButton/AppNavButton";
-import { addNote, updateNote, removeNote } from "../../store/actions/notes.actions.js";
+import { addNote, updateNote, removeNote } from "../../store/actions";
 import { useHistory, useParams } from "react-router-dom";
 import {useDispatch, useStore} from "react-redux";
 import {getItemByIdApi} from "../../services/API";
+import ProgressBar from "../../components/BaseUI/ProgressBar/ProgressBar";
+import cls from "classnames";
+
+import styles from "./edit.module.scss";
+import buttonStyles from "../../components/AppNavButton/AppNavButton.module.scss";
 
 function Edit(props) {
   const store = useStore();
   const params = useParams();
   const dispatch = useDispatch();
-  const [state, setState] = useState({});
+  const [state, setState] = useState({
+    item: {},
+    preloader: true
+  });
   const asyncGetItemData = async function() {
     if(props.mode){
+      setState({
+        ...state.item,
+        preloader: false
+      });
       return;
     }
     const result = await getItemByIdApi(params.id);
-    setState(result.data);
+    setState({
+      item: result.data,
+      preloader: false
+    })
   };
-
-  useEffect( () => { asyncGetItemData(params.id) }, []);
 
   const handleRemoveItem = async function (id) {
     try {
@@ -41,12 +52,18 @@ function Edit(props) {
   const handleClick = () => {
     history.push("/");
   };
+  useEffect( () => { asyncGetItemData(params.id) }, []);
+
   return(
     <div>
+      { state.preloader && <ProgressBar className={styles.container__progressbar} /> }
       <div className="content__wrapper container__edit">
         <div className="block content__block">
-          <AppNavButton action={handleClick} className={'button button__nav button__action--prev'} />
-          <AppFormEditItem handleRemoveItem={handleRemoveItem} {...state} goBack={handleClick} onSubmit={actions}/>
+          <button
+            className={cls(buttonStyles.button, buttonStyles.button__action_prev, styles.button__nav)}
+            onClick={handleClick}
+          />
+          <AppFormEditItem removeButton={props.mode !== 'add'} handleRemoveItem={handleRemoveItem} {...state.item} goBack={handleClick} onSubmit={actions}/>
         </div>
       </div>
     </div>

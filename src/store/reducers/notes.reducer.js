@@ -1,7 +1,9 @@
 import { NOTES_CONSTANTS } from "../constants/"
 
 const defaultState = [];
-const notesReducer = (state = defaultState, action) => {
+const noteDetailState = {};
+
+export const notesReducer = (state = defaultState, action) => {
   switch (action.type) {
     case NOTES_CONSTANTS.ADD_NOTE:
       return [
@@ -29,4 +31,10 @@ const notesReducer = (state = defaultState, action) => {
   }
 };
 
-export default notesReducer
+export const noteDetailReducer = (state = noteDetailState, action) => {
+  if (action.type === NOTES_CONSTANTS.SET_NOTE_BY_ID) {
+    return action.payload;
+  } else {
+    return state
+  }
+};

@@ -1,11 +1,14 @@
 import React, {useCallback, useState} from 'react'
 import { Route, Redirect } from "react-router-dom";
-import "./login.scss"
 import AppNavButton from "../../components/AppNavButton/AppNavButton";
 import BaseInput from "../../components/BaseUI/BaseInput";
 import BaseTitle from "../../components/BaseUI/BaseTitle";
 import { logIn, userCreate } from "../../store/actions"
 import {useDispatch} from "react-redux";
+
+import "./login.scss"
+import cls from "classnames";
+import buttonStyles from "../../components/AppNavButton/AppNavButton.module.scss";
 
 function Login(props) {
   const [formData, setFormData] = useState({});
@@ -62,7 +65,12 @@ function Login(props) {
             <div className="form__group login__buttons">
               {props.mode === "login" &&  <a onClick={handleToCreate} href="#" className="link__action">I dont have already account</a>}
               {props.mode === "create" &&  <a onClick={handleToLogin} href="#" className="link__action">I have already account</a>}
-              <AppNavButton type="submit" className={'button button__primary'} title={props.mode === "login" ? "Sign in" : "Sign up"}/>
+              <button
+                type="submit"
+                className={cls(buttonStyles.button, buttonStyles.button__primary)}
+              >
+                {props.mode === "login" ? "Sign in" : "Sign up"}
+              </button>
             </div>
           </form>
         </div>

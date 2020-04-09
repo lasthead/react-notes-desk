@@ -5,11 +5,12 @@ import {
 } from "react-router-dom";
 import Home from './pages/notes'
 import Login from './pages/login/login'
-import './App.scss';
+import styles from './App.modules.scss';
 import Edit from "./pages/edit/edit";
 import { setUserData } from './store/actions';
-import {useDispatch, useSelector, useStore} from "react-redux";
+import {useDispatch, useStore} from "react-redux";
 import AuthRoute from "./components/AuthRoute";
+import ProgressBar from "./components/BaseUI/ProgressBar/ProgressBar";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -57,9 +58,12 @@ export default function App() {
       });
     }
   });
+  //console.log(appData.hasAuthStateChanged);
   return (
     <div className="App app__wrapper">
-      { (!appData.hasAuthStateChanged || store.getState().session.isLoading) &&  <div className="progress-bar hidden" /> }
+      { (!appData.hasAuthStateChanged || store.getState().session.isLoading) &&
+        <ProgressBar className={styles.progressbar}/>
+      }
       { (appData.hasAuthStateChanged && !store.getState().session.isLoading) &&
         <Switch>
           <AuthRoute authUser={appData.authUser} authOnly exact history={history} path='/' component={Home}/>

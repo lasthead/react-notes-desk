@@ -1,7 +1,7 @@
 import { NOTES_CONSTANTS } from '../constants/';
 import { SESSION_CONSTANTS } from '../constants'
 
-import {createNoteApi, getItemsListApi, updateNoteApi, removeNoteApi} from "../../services/API";
+import {createNoteApi, getItemsListApi, updateNoteApi, removeNoteApi, getItemByIdApi} from "../../services/API";
 
 export const addNote = (object) => async dispatch  => {
   try {
@@ -31,9 +31,24 @@ export const getNotesList = () => async dispatch => {
   }
 };
 
+export const getNoteById = (id) => async dispatch => {
+  try {
+    const response = await getItemByIdApi(id);
+    dispatch({
+      type: NOTES_CONSTANTS.SET_NOTE_BY_ID,
+      payload: response.data
+    });
+  }
+  catch (e) {
+    console.log('error');
+  }
+};
+
 export const updateNote = (object) => async dispatch => {
   try {
+    dispatch({ type: SESSION_CONSTANTS.LOADING });
     await updateNoteApi(object);
+    dispatch({ type: SESSION_CONSTANTS.STOP_LOADING });
     dispatch({
       type: NOTES_CONSTANTS.UPDATE_NOTE,
       payload: object

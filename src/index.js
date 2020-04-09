@@ -9,21 +9,10 @@ import {createStore, applyMiddleware} from "redux";
 import axios from "axios";
 import { createBrowserHistory } from "history";
 import thunk from "redux-thunk";
-import {setUserData} from "./store/actions";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
-
 const store = createStore(rootReducer, applyMiddleware(thunk));
 const customHistory = createBrowserHistory();
-const asyncGetUserData = async () => {
-  if (localStorage.getItem('refreshToken')) {
-    try {
-      store.dispatch(await setUserData());
-    } catch(error) {}
-  }
-};
-
-asyncGetUserData();
 
 const app = (
   <Provider store={store}>

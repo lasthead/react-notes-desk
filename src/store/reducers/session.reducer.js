@@ -3,7 +3,8 @@ import { SESSION_CONSTANTS } from '../constants'
 const initialState = {
   user: null,
   errorMsg: '',
-  isLoading: false
+  isLoading: false,
+  innerPreloader: false,
 };
 
 export default (state = initialState, action) => {
@@ -50,6 +51,16 @@ export default (state = initialState, action) => {
         isLoading: true
       };
     case SESSION_CONSTANTS.STOP_LOADING:
+      return {
+        ...state,
+        isLoading: false
+      };
+    case SESSION_CONSTANTS.INNER_LOADING:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case SESSION_CONSTANTS.STOP_INNER_LOADING:
       return {
         ...state,
         isLoading: false
