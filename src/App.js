@@ -14,7 +14,6 @@ import AuthRoute from "./components/AuthRoute";
 import ProgressBar from "./components/BaseUI/ProgressBar/ProgressBar";
 
 export default function App() {
-  console.log('компонент перерисовался');
   const store = useStore();
   const history = useHistory();
   const dispatch = useDispatch();
