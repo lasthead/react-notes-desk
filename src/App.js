@@ -12,6 +12,7 @@ import { setStoreUserData } from './store/actions';
 import {useDispatch, useStore} from "react-redux";
 import AuthRoute from "./components/AuthRoute";
 import ProgressBar from "./components/BaseUI/ProgressBar/ProgressBar";
+import WebFont from 'webfontloader';
 
 export default function App() {
   const store = useStore();
