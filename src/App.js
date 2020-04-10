@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 import { Notes } from './pages/notes'
 import Login from './pages/login/login'
-import './App.modules.scss';
+import './fonts/style.css';
 import styles from './App.modules.scss';
 import Edit from "./pages/edit/edit";
 import { setStoreUserData } from './store/actions';
