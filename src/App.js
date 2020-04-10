@@ -1,10 +1,11 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Switch,
   useHistory
 } from "react-router-dom";
 import { Notes } from './pages/notes'
 import Login from './pages/login/login'
+import './App.modules.scss';
 import styles from './App.modules.scss';
 import Edit from "./pages/edit/edit";
 import { setStoreUserData } from './store/actions';
@@ -17,8 +18,6 @@ export default function App() {
   const store = useStore();
   const history = useHistory();
   const dispatch = useDispatch();
-  const [currentUser, setCurrentUser] = useState(false);
-  const [userAuth, setUserAuth] = useState(false);
   const [appData, setAppData] = useState({
     hasAuthStateChanged: false,
     authUser: null
