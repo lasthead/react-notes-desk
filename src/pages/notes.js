@@ -1,19 +1,21 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import AppNotesList from "../components/AppNotesList/AppNotesList";
 import AppHeader from "../components/AppHeader/AppHeader";
-import {useDispatch, useSelector} from "react-redux";
-import {getNotesList} from "../store/actions";
 import ProgressBar from "../components/BaseUI/ProgressBar/ProgressBar";
 
 import "./notes.scss";
+import {getItemsListApi} from "../services/API";
 
-export default function Notes(props) {
-  const dispatch = useDispatch();
-  const asyncGetItemsList = async () => {
-    dispatch(await getNotesList());
-  };
-  const notes = useSelector(state => state.notes);
-  useEffect( () => { asyncGetItemsList() }, []);
+const asyncGetItemsList = async () => {
+  return await getItemsListApi();
+  //dispatch(await getNotesList());
+};
+
+export const Notes = (props) => {
+  const [state, updateState] = useState([]);
+  useEffect( () => { asyncGetItemsList().then((result) => {
+    updateState(result.data);
+  }) }, []);
   // console.log(notes);
   // let items = notes;
   const handleSearch = (event) => {
@@ -25,13 +27,13 @@ export default function Notes(props) {
   return (
     <div>
       <AppHeader history={props.history} />
-      { notes.length < 1 && <ProgressBar/> }
+      { state.length < 1 && <ProgressBar/> }
       <div className="content__wrapper">
         <div className="block content__block">
           <div className="form__search">
             <input onChange={handleSearch} placeholder={"Search"} className="input input__search" type="text"/>
           </div>
-          <AppNotesList items={notes} history={props.history} />
+          <AppNotesList items={state} history={props.history} />
         </div>
       </div>
     </div>

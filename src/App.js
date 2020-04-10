@@ -1,28 +1,37 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
   Switch,
   useHistory
 } from "react-router-dom";
-import Home from './pages/notes'
+import { Notes } from './pages/notes'
 import Login from './pages/login/login'
 import styles from './App.modules.scss';
 import Edit from "./pages/edit/edit";
-import { setUserData } from './store/actions';
+import { setStoreUserData } from './store/actions';
 import {useDispatch, useStore} from "react-redux";
 import AuthRoute from "./components/AuthRoute";
 import ProgressBar from "./components/BaseUI/ProgressBar/ProgressBar";
 
 export default function App() {
-  const dispatch = useDispatch();
+  console.log('компонент перерисовался');
   const store = useStore();
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const [currentUser, setCurrentUser] = useState(false);
+  const [userAuth, setUserAuth] = useState(false);
   const [appData, setAppData] = useState({
     hasAuthStateChanged: false,
     authUser: null
   });
+
+  // useEffect(() => {
+  //   setUserAuth(!!currentUser);
+  // }, [currentUser]);
+
   const asyncGetUserData = async () => {
     if (localStorage.getItem('refreshToken')) {
       try {
-        dispatch(await setUserData());
+        dispatch(await setStoreUserData());
         setAppData({
           hasAuthStateChanged: true,
           authUser: true
@@ -42,8 +51,9 @@ export default function App() {
       });
     }
   };
-  useEffect( () => { asyncGetUserData(); }, []);
-  const history = useHistory();
+
+  useEffect( () => { asyncGetUserData().then(null); },[]);
+
   store.subscribe(() => {
     if(!store.getState().session.user) {
       setAppData({
@@ -66,7 +76,7 @@ export default function App() {
       }
       { (appData.hasAuthStateChanged && !store.getState().session.isLoading) &&
         <Switch>
-          <AuthRoute authUser={appData.authUser} authOnly exact history={history} path='/' component={Home}/>
+          <AuthRoute authUser={appData.authUser} authOnly exact history={history} path='/' component={Notes}/>
           <AuthRoute authUser={appData.authUser} noAuthOnly path='/auth/login' mode="login" history={history} component={Login}/>
           <AuthRoute authUser={appData.authUser} noAuthOnly path='/auth/create' mode="create" history={history} component={Login}/>
           <AuthRoute authUser={appData.authUser} authOnly exact history={history} mode="add" path='/add' component={Edit}/>
@@ -76,4 +86,3 @@ export default function App() {
     </div>
   );
 }
-

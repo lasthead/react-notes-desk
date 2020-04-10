@@ -52,7 +52,7 @@ function Edit(props) {
   const handleClick = () => {
     history.push("/");
   };
-  useEffect( () => { asyncGetItemData(params.id) }, []);
+  useEffect( () => { asyncGetItemData(params.id).then(null) }, []);
 
   return(
     <div>

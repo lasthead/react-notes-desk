@@ -1,7 +1,6 @@
 import React from "react";
 import AppHeaderLoginBlock from "./AppHeaderLoginBlock/AppHeaderLoginBlock";
 import {Link, useHistory} from "react-router-dom";
-import AppNavButton from "../AppNavButton/AppNavButton";
 import BaseTitle from "../BaseUI/BaseTitle";
 import {logOut} from "../../store/actions";
 import {useDispatch} from "react-redux";

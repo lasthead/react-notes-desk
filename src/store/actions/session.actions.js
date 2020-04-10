@@ -35,7 +35,7 @@ export const userCreate = ({ email, password }) => async dispatch => {
   }
 };
 
-export const setUserData = () => async dispatch => {
+export const setStoreUserData = () => async dispatch => {
   try {
   dispatch({ type: SESSION_CONSTANTS.LOADING });
   const payload = await getUserData();

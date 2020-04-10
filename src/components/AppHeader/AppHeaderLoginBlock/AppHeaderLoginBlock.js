@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React from "react";
 import "./AppHeaderLoginBlock.scss";
 import {useSelector} from "react-redux";
 

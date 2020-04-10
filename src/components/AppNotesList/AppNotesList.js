@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from 'react-redux';
 import "./AppNotesList.scss";
 import AppListItem from "../AppListItem/AppListItem";
 import { useHistory } from "react-router-dom";
