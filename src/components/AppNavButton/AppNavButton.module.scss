@@ -2,6 +2,8 @@
   font-size: var(--font-size-base);
   cursor: pointer;
   transition: all 0.2s;
+  background: none;
+
   &:hover {
     box-shadow: 1px 1px 5px 1px var(--color-grey);
   }
