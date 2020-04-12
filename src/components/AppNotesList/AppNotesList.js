@@ -13,10 +13,10 @@ function NotesList(props) {
   return (
     <div className="items__list">
       {
-        props.items.map((note, index) => {
+        props.items.length > 0 ? props.items.map((note, index) => {
             return (<AppListItem key={note.id ? note.id : index} {...note} onClick={toggleNote}/>)
           }
-        )
+        ) : ''
       }
     </div>
   )
