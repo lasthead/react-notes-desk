@@ -18,17 +18,11 @@ export const addNote = (object) => async dispatch  => {
 };
 
 
-export const getNotesList = () => async dispatch => {
-  try {
-    const response = await getItemsListApi();
-    dispatch({
-      type: NOTES_CONSTANTS.SET_NOTES_LIST,
-      payload: response.data
-    });
-  }
-  catch (e) {
-    console.log('error');
-  }
+export const setNotesList = (dataArray) => {
+  return {
+    type: NOTES_CONSTANTS.SET_NOTES_LIST,
+    payload: dataArray
+  };
 };
 
 export const getNoteById = (id) => async dispatch => {

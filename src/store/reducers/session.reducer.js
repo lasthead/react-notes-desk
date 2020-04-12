@@ -28,7 +28,13 @@ export default (state = initialState, action) => {
     case SESSION_CONSTANTS.LOG_IN_FAIL:
       return {
         ...state,
-        errorMsg: action.payload,
+        errorMsg: 'Login failed',
+        isLoading: false
+      };
+    case SESSION_CONSTANTS.CREATE_USER_FAIL:
+      return {
+        ...state,
+        errorMsg: 'Sign in failed',
         isLoading: false
       };
     case SESSION_CONSTANTS.USER_SET_DATA:

@@ -30,7 +30,7 @@ export const userCreate = ({ email, password }) => async dispatch => {
       payload: response.data
     });
   } catch (error) {
-    dispatch({ type: SESSION_CONSTANTS.LOG_IN_FAIL, message: error });
+    dispatch({ type: SESSION_CONSTANTS.CREATE_USER_FAIL, message: error });
     console.log(error);
   }
 };

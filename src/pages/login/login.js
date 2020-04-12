@@ -2,15 +2,37 @@ import React, {useCallback, useState} from 'react'
 import BaseInput from "../../components/BaseUI/BaseInput";
 import BaseTitle from "../../components/BaseUI/BaseTitle";
 import { logIn, userCreate } from "../../store/actions"
-import {useDispatch} from "react-redux";
+import {useDispatch, useStore} from "react-redux";
+import { validateField } from "../../utils/validationHelper";
 
 import "./login.scss"
 import cls from "classnames";
 import buttonStyles from "../../components/AppNavButton/AppNavButton.module.scss";
+import {FormErrors} from "../../components/FormErrors/FormErrors";
 
 function Login(props) {
-  const [formData, setFormData] = useState({});
   const dispatch = useDispatch();
+  const store = useStore();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    validateFields: {
+      email: '',
+      password: ''
+    },
+    formValid: false
+  });
+
+  const handleToCreate = (event) => {
+    event.preventDefault();
+    props.history.push('/auth/create');
+  };
+
+  const handleToLogin = (event) => {
+    event.preventDefault();
+    props.history.push('/auth/login');
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -18,25 +40,24 @@ function Login(props) {
         dispatch(await userCreate(formData));
       }
       else{
+        console.log(formData);
         dispatch(await logIn(formData));
       }
     } catch (e) {
       console.log(e);
     }
   };
-  const handleToCreate = (event) => {
-    event.preventDefault();
-    props.history.push('/auth/create');
-  };
-  const handleToLogin = (event) => {
-    event.preventDefault();
-    props.history.push('/auth/login');
-  };
+
   const updateField = useCallback((event) => {
     const { name, value } = event.target;
+    const fieldValidate = validateField(name, value);
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
+      validateFields : {
+        ...formData.validateFields,
+        [name]: fieldValidate
+      }
     });
   }, [formData]);
 
@@ -44,7 +65,7 @@ function Login(props) {
     <div>
       <div className="content__wrapper">
         <div className="block content__block block__auth form form__wrapper">
-          <form onSubmit={handleSubmit} noValidate>
+          <form onSubmit={handleSubmit}>
             <BaseTitle text={"The Notes"}/>
             <BaseInput
               onChange={updateField}
@@ -65,11 +86,13 @@ function Login(props) {
               {props.mode === "create" &&  <a onClick={handleToLogin} href="#" className="link__action">I have already account</a>}
               <button
                 type="submit"
+                disabled={!(formData.validateFields.email && formData.validateFields.password)}
                 className={cls(buttonStyles.button, buttonStyles.button__primary)}
               >
                 {props.mode === "login" ? "Sign in" : "Sign up"}
               </button>
             </div>
+            <FormErrors serverError={store.getState().session.errorMsg} formErrors={formData.validateFields}/>
           </form>
         </div>
       </div>
