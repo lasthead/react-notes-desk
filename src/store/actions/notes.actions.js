@@ -52,10 +52,12 @@ export const updateNote = (object) => async dispatch => {
 
 export const removeNote = (id) => async dispatch => {
   try {
+    dispatch({ type: SESSION_CONSTANTS.LOADING });
     await removeNoteApi(id);
     dispatch({
       type: NOTES_CONSTANTS.REMOVE_NOTE,
       id
     });
+    dispatch({ type: SESSION_CONSTANTS.STOP_LOADING });
   } catch (e) {}
 };

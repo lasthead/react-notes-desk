@@ -33,4 +33,4 @@ export const Notes = (props) => {
       </div>
     </div>
   );
-}
+};

@@ -15,17 +15,21 @@ export const notesReducer = (state = defaultState, action) => {
           completed: action.object.completed
         }
       ];
+
     case NOTES_CONSTANTS.UPDATE_NOTE:
       return state.map(note => note.id === action.payload.id ?
         { ...note,  name: action.payload.name, text: action.payload.text } :
         note
       );
+
     case NOTES_CONSTANTS.REMOVE_NOTE:
       return state.filter((note) => parseInt(note.id) !== parseInt(action.id));
+
     case NOTES_CONSTANTS.SET_NOTES_LIST:
       return [
         ...action.payload
       ];
+
     default:
       return state
   }

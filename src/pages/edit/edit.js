@@ -33,11 +33,9 @@ function Edit(props) {
     })
   };
 
-  const handleRemoveItem = async function (id) {
-    try {
-      dispatch(await removeNote(id));
-      history.push('/');
-    } catch (e) {}
+  const handleRemoveItem = function (id) {
+    store.dispatch(removeNote(id));
+    history.push('/');
   };
   const history = useHistory();
   const actions = (formData) => {
