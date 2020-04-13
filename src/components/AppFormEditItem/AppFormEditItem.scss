@@ -16,7 +16,7 @@
     }
     &__text {
       font-size: var(--font-size-base);
-      width: 100%;
+      width: calc(100% - 1.1rem);
       resize: none;
     }
   }
