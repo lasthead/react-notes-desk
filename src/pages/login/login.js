@@ -82,8 +82,8 @@ function Login(props) {
               type={'password'}
             />
             <div className="form__group login__buttons">
-              {props.mode === "login" &&  <a onClick={handleToCreate} href="#" className="link__action">I dont have already account</a>}
-              {props.mode === "create" &&  <a onClick={handleToLogin} href="#" className="link__action">I have already account</a>}
+              {props.mode === "login" &&  <a onClick={handleToCreate} href={"# "} className="link__action">I dont have already account</a>}
+              {props.mode === "create" &&  <a onClick={handleToLogin} href={"# "} className="link__action">I have already account</a>}
               <button
                 type="submit"
                 disabled={!(formData.validateFields.email && formData.validateFields.password)}

@@ -3,7 +3,9 @@
   cursor: pointer;
   transition: all 0.2s;
   background: none;
-
+  &:focus {
+    outline: none;
+  }
   &:hover {
     box-shadow: 1px 1px 5px 1px var(--color-grey);
   }

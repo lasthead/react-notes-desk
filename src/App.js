@@ -22,10 +22,6 @@ export default function App() {
     authUser: null
   });
 
-  // useEffect(() => {
-  //   setUserAuth(!!currentUser);
-  // }, [currentUser]);
-
   const asyncGetUserData = async () => {
     if (localStorage.getItem('refreshToken')) {
       try {
@@ -48,25 +44,24 @@ export default function App() {
         authUser: null
       });
     }
+    store.subscribe(() => {
+      if(!store.getState().session.user) {
+        setAppData({
+          hasAuthStateChanged: true,
+          authUser: null
+        })
+      }
+      else {
+        setAppData({
+          hasAuthStateChanged: true,
+          authUser: store.getState().session.user
+        });
+      }
+    });
   };
 
   useEffect( () => { asyncGetUserData().then(null); },[]);
 
-  store.subscribe(() => {
-    if(!store.getState().session.user) {
-      setAppData({
-        hasAuthStateChanged: true,
-        authUser: null
-      })
-    }
-    else {
-      setAppData({
-        hasAuthStateChanged: true,
-        authUser: store.getState().session.user
-      });
-    }
-  });
-  //console.log(appData.hasAuthStateChanged);
   return (
     <div className="App app__wrapper">
       { (!appData.hasAuthStateChanged || store.getState().session.isLoading) &&

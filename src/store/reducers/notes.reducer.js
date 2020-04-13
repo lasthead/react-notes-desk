@@ -21,7 +21,7 @@ export const notesReducer = (state = defaultState, action) => {
         note
       );
     case NOTES_CONSTANTS.REMOVE_NOTE:
-      return state.filter((note) => note.id !== action.id);
+      return state.filter((note) => parseInt(note.id) !== parseInt(action.id));
     case NOTES_CONSTANTS.SET_NOTES_LIST:
       return [
         ...action.payload

@@ -5,6 +5,11 @@
       padding: .2rem .5rem;
       border: .05rem solid var(--color-grey);
       border-radius: .2rem;
+      transition: all 0.2s;
+      &:focus {
+        outline: none;
+        box-shadow: 1px 1px 5px 1px var(--color-grey);
+      }
     }
     &__title {
       font-size: var(--font-title);

@@ -1,20 +1,20 @@
 import { NOTES_CONSTANTS } from '../constants/';
 import { SESSION_CONSTANTS } from '../constants'
 
-import {createNoteApi, getItemsListApi, updateNoteApi, removeNoteApi, getItemByIdApi} from "../../services/API";
+import {createNoteApi, updateNoteApi, removeNoteApi, getItemByIdApi} from "../../services/API";
 
 export const addNote = (object) => async dispatch  => {
   try {
     dispatch({ type: SESSION_CONSTANTS.LOADING });
-    await createNoteApi(object);
+    const result = await createNoteApi(object);
+    dispatch({
+      type: NOTES_CONSTANTS.ADD_NOTE,
+      object: result.data
+    });
   } catch (e) {
     console.log('error');
   }
   dispatch({ type: SESSION_CONSTANTS.STOP_LOADING });
-  dispatch({
-    type: NOTES_CONSTANTS.ADD_NOTE,
-    object
-  });
 };
 
 

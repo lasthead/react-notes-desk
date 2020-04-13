@@ -3,7 +3,6 @@ import "./AppNotesList.scss";
 import AppListItem from "../AppListItem/AppListItem";
 import { useHistory } from "react-router-dom";
 
-
 function NotesList(props) {
   const history = useHistory();
   function toggleNote(id) {

@@ -10,29 +10,25 @@ import {FilteredItemsList} from "../components/FilteredItemsList/FilteredItemsLi
 
 const asyncGetItemsList = async () => {
   return await getItemsListApi();
-  //dispatch(await getNotesList());
 };
 
 export const Notes = (props) => {
-  const [state, updateState] = useState([]);
+  const dispatch = useDispatch();
+  const store = useStore();
+
   useEffect( () => {
-    asyncGetItemsList().then(result => updateState(result.data))
+    asyncGetItemsList().then(result => {
+      dispatch(setNotesList(result.data));
+    });
   }, []);
-  //const dispatch = useDispatch();
-  // dispatch(setNotesList(state));
-  //useFetching;
 
-  // let items = notes;
-
-
-  //console.log(items);
   return (
     <div>
       <AppHeader history={props.history} />
-      { state.length < 1 && <ProgressBar/> }
+      { store.getState().notes.length < 1 && <ProgressBar/> }
       <div className="content__wrapper">
         <div className="block content__block">
-          <FilteredItemsList items={state} />
+          <FilteredItemsList items={store.getState().notes} />
         </div>
       </div>
     </div>
