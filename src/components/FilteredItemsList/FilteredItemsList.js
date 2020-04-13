@@ -3,29 +3,31 @@ import AppNotesList from "../AppNotesList/AppNotesList";
 
 export const FilteredItemsList = (props) => {
   const [state, updateState] = useState({});
-
+  const [fitleredState, updateFilteredState] = useState(state);
   useEffect(() => {
     updateState(props.items);
+    updateFilteredState(props.items);
   }, [props.items]);
 
   const handleSearch = (event) => {
     const searchString = event.target.value;
-    if(event.target.value.length) {
+
+    if(searchString.length) {
       const findItemsByName = state.filter(
         o => o.name.toLowerCase().indexOf(searchString.toLowerCase()) >= 0
       );
       if(findItemsByName.length) {
-        updateState(findItemsByName);
+        updateFilteredState(findItemsByName);
       }
       else {
         const findItemsByText = state.filter(
           o => o.text.toLowerCase().indexOf(searchString.toLowerCase()) >= 0
         );
-        updateState(findItemsByText);
+        updateFilteredState(findItemsByText);
       }
     }
     else {
-      updateState(props.items);
+      updateFilteredState(props.items);
     }
   };
   return (
@@ -33,7 +35,7 @@ export const FilteredItemsList = (props) => {
       <div className="form__search">
         <input onChange={handleSearch} placeholder={"Search"} className="input input__search" type="text"/>
       </div>
-      <AppNotesList items={state} />
+      <AppNotesList items={fitleredState} />
     </>
   )
 };

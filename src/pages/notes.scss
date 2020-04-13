@@ -12,4 +12,10 @@
   font-size: var(--font-size-base);
   border: .07rem solid var(--color-grey);
   border-radius: .4rem;
+  transition: all 0.2s;
+
+  &:focus {
+    outline: none;
+    box-shadow: 1px 1px 5px 1px var(--color-grey);
+  }
 }
