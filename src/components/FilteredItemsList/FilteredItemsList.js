@@ -35,7 +35,7 @@ export const FilteredItemsList = (props) => {
       <div className="form__search">
         <input onChange={handleSearch} placeholder={"Search"} className="input input__search" type="text"/>
       </div>
-      <AppNotesList items={fitleredState} />
+      { state.length > 0 ? <AppNotesList items={fitleredState} /> : <div>Empty notes list</div>}
     </>
   )
 };

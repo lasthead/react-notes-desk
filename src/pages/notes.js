@@ -15,17 +15,19 @@ const asyncGetItemsList = async () => {
 export const Notes = (props) => {
   const dispatch = useDispatch();
   const store = useStore();
-
+  const [preloader, updatePreloader] = useState(false);
   useEffect( () => {
+    updatePreloader(true);
     asyncGetItemsList().then(result => {
       dispatch(setNotesList(result.data));
+      updatePreloader(false);
     });
   }, []);
 
   return (
     <div>
       <AppHeader history={props.history} />
-      { store.getState().notes.length < 1 && <ProgressBar/> }
+      { preloader && <ProgressBar/> }
       <div className="content__wrapper">
         <div className="block content__block">
           <FilteredItemsList items={store.getState().notes} />
