@@ -1,8 +1,6 @@
 import React from 'react';
 import styles from './FormErrors.module.scss';
 export const FormErrors = ({serverError, formErrors}) => {
-  console.log(serverError);
-  console.log(formErrors);
   return (
     <div className={styles.form__errors}>
       {Object.keys(formErrors).map((fieldName, i) => {
