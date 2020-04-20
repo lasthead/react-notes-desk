@@ -25,7 +25,7 @@ export const Notes = (props) => {
   }, []);
 
   return (
-    <div>
+    <>
       <AppHeader history={props.history} />
       { preloader && <ProgressBar/> }
       <div className="content__wrapper">
@@ -33,6 +33,6 @@ export const Notes = (props) => {
           <FilteredItemsList items={store.getState().notes} />
         </div>
       </div>
-    </div>
+    </>
   );
 };

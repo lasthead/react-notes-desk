@@ -62,39 +62,37 @@ function Login(props) {
   }, [formData]);
 
   return (
-    <div>
-      <div className="content__wrapper">
-        <div className="block content__block block__auth form form__wrapper">
-          <form onSubmit={handleSubmit}>
-            <BaseTitle text={"The Notes"}/>
-            <BaseInput
-              onChange={updateField}
-              defaultValue={formData.email}
-              placeholder={"Email"}
-              name={'email'}
-              type={'text'}
-            />
-            <BaseInput
-              onChange={updateField}
-              defaultValue={formData.password}
-              placeholder={"Password"}
-              name={'password'}
-              type={'password'}
-            />
-            <div className="form__group login__buttons">
-              {props.mode === "login" &&  <a onClick={handleToCreate} href={"# "} className="link__action">I dont have already account</a>}
-              {props.mode === "create" &&  <a onClick={handleToLogin} href={"# "} className="link__action">I have already account</a>}
-              <button
-                type="submit"
-                disabled={!(formData.validateFields.email && formData.validateFields.password)}
-                className={cls(buttonStyles.button, buttonStyles.button__primary)}
-              >
-                {props.mode === "login" ? "Sign in" : "Sign up"}
-              </button>
-            </div>
-            <FormErrors serverError={store.getState().session.errorMsg} formErrors={formData.validateFields}/>
-          </form>
-        </div>
+    <div className="content__wrapper">
+      <div className="block content__block block__auth form form__wrapper">
+        <form onSubmit={handleSubmit}>
+          <BaseTitle text={"The Notes"}/>
+          <BaseInput
+            onChange={updateField}
+            defaultValue={formData.email}
+            placeholder={"Email"}
+            name={'email'}
+            type={'text'}
+          />
+          <BaseInput
+            onChange={updateField}
+            defaultValue={formData.password}
+            placeholder={"Password"}
+            name={'password'}
+            type={'password'}
+          />
+          <div className="form__group login__buttons">
+            {props.mode === "login" &&  <a onClick={handleToCreate} href={"# "} className="link__action">I dont have already account</a>}
+            {props.mode === "create" &&  <a onClick={handleToLogin} href={"# "} className="link__action">I have already account</a>}
+            <button
+              type="submit"
+              disabled={!(formData.validateFields.email && formData.validateFields.password)}
+              className={cls(buttonStyles.button, buttonStyles.button__primary)}
+            >
+              {props.mode === "login" ? "Sign in" : "Sign up"}
+            </button>
+          </div>
+          <FormErrors serverError={store.getState().session.errorMsg} formErrors={formData.validateFields}/>
+        </form>
       </div>
     </div>
   );

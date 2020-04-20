@@ -53,7 +53,7 @@ function Edit(props) {
   useEffect( () => { asyncGetItemData(params.id).then(null) }, []);
 
   return(
-    <div>
+    <>
       { state.preloader && <ProgressBar className={styles.container__progressbar} /> }
       <div className="content__wrapper container__edit">
         <div className="block content__block">
@@ -64,7 +64,7 @@ function Edit(props) {
           <AppFormEditItem removeButton={props.mode !== 'add'} handleRemoveItem={handleRemoveItem} {...state.item} goBack={handleClick} onSubmit={actions}/>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

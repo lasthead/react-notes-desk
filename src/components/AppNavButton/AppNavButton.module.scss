@@ -1,3 +1,5 @@
+@import "../../assets/mixins";
+
 .button {
   font-size: var(--font-size-base);
   cursor: pointer;
@@ -33,7 +35,8 @@
       border: none;
       width: 1.5rem;
       height: 1.5rem;
-      padding: .5rem;
+      padding: .8rem;
+      margin: 0 1rem;
       &:hover {
         box-shadow: none;
       }
