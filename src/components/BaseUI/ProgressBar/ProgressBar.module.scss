@@ -1,5 +1,10 @@
+@import "../../../assets/mixins";
+
 .progressbar {
-  width: 100%;
+  width: 90%;
+  @media #{$min768} {
+    width: 100%;
+  }
   height: 100%;
   background: url("../../../assets/images/preloader.gif") white no-repeat center;
   position: absolute;

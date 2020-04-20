@@ -1,8 +1,13 @@
 @import "./assets/mixins";
 @import "assets/blocks/container/style";
 
+#root {
+  overflow: hidden;
+}
+
 :root {
   --font-helvetica: "Helvetica Neue";
+  --font-arial: "Arial";
   --app-content-width-desktop: 40rem;
   --color-grey: rgba(192, 192, 192, 0.5);
   --font-title: 1.7rem;
@@ -30,6 +35,10 @@ a {
 
 .app__wrapper {
   padding: 4rem 2rem;
+  @media #{$min768} {
+    padding: 4rem 0;
+  }
+  overflow: hidden;
 }
 
 .content {
