@@ -3,6 +3,7 @@
 
 #root {
   overflow: hidden;
+  min-height: 90vh;
 }
 
 :root {
@@ -38,7 +39,6 @@ a {
   @media #{$min768} {
     padding: 4rem 0;
   }
-  overflow: hidden;
 }
 
 .content {
